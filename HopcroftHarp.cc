@@ -20,7 +20,7 @@ using namespace std;
 
 class HopcroftKarp {
 private:
-    int n, m;                     // left size, right size
+    const int n, m;               // left size, right size
     vector<vector<int>> adj;      // adjacency list (left -> right)
 
     // dist[u] = level of u in the BFS graph
@@ -94,7 +94,7 @@ public:
     HopcroftKarp(int leftSize, int rightSize) : n(leftSize), m(rightSize)
     {
         adj.resize(n);
-        dist.assign(n, 0);
+        dist.assign(n, -1);
         matchL.assign(n, -1);
         matchR.assign(m, -1);
     }
@@ -132,7 +132,7 @@ public:
         return matching;
     }
 
-    vector<pair<int,int>> getMatches() {
+    vector<pair<int,int>> getMatches() const {
         vector<pair<int,int>> result;
         for (int u = 0; u < n; ++u) {
             if (matchL[u] != -1) {
@@ -217,5 +217,6 @@ int test2() {
 int main()
 {
     test1();
+    test2();
     return 0;
 }
